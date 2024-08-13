@@ -1,0 +1,22 @@
+#docker compose syntax
+version: "3.9"
+
+#docker compose consist of one or more services
+#app - current service
+#for build - use root folder
+#map 8000 port of your machine to container
+#volumes - map directory from our system to docker container - auto sync
+#command to run the service, overriden by docker compose run
+services:
+  app:
+    build: 
+      context: .
+      args:
+        - DEV=true
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    
